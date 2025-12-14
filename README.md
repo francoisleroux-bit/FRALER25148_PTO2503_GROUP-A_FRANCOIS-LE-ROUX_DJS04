@@ -1,95 +1,142 @@
-### React Podcast Discovery App
+# 📘 DJS04 – React Podcast App: Search, Sort, Filter & Pagination
 
-A responsive React application that fetches podcast data from an external API and displays a dynamic grid of podcast previews. Built as part of the DJS03: React Podcast Landing Page project.
+## 📌 Project Overview
 
----
+DJS04 extends the podcast preview application built in DJS03 by introducing dynamic UI controls and a global state management layer.
+The app now supports live searching, sorting, genre filtering, and pagination, all synchronised through a custom React Context provider.
 
-## 📌 Overview
-
-This project is a podcast discovery landing page built with React.
-It fetches podcast previews from an external API and displays them in a clean, responsive grid layout. Each podcast preview card shows the podcast image, the number of seasons, genre tags, and a human-readable “last updated” date.
-
-The app includes complete loading, error, and empty states, and is built with fully modular components and clean, documented code.
+This project demonstrates my ability to manage complex UI interactions, centralise global state, and build a scalable front-end architecture.
 
 ---
 
-## 🚀 Features
+## 🚀 Core Features
 
-# ✔ Data Fetching
+### 🔍 Live Search
 
-- Fetches podcast data from:
-  https://podcast-api.netlify.app/
+- Search updates podcast results in real time.
 
-- Fetch runs automatically on page load using useEffect().
+- Matches any part of a podcast title (case-insensitive).
 
-- Handles loading, error, and fallback (empty) states.
-
-# ✔ Reusable Podcast Preview Card
-
-Each card displays:
-
-- Podcast image
-
-- Podcast title
-
-- Number of seasons
-
-- Associated genre names
-
-- Formatted “last updated” date (e.g., “2 days ago”)
-
-# ✔ Responsive Grid Layout
-
-1 column on mobile
-
-2 columns on small tablets
-
-3 columns on medium screens
-
-4 columns on larger desktops
-
-Built using CSS Grid + media queries
-
-# ✔ Clean & Modular Codebase
-
-- Component-based structure
-
-- Utility functions separated (e.g., date formatter)
-
-- API calls isolated in their own module
-
-- Organized CSS files
+- Search works together with filters, sorting, and pagination.
 
 ---
 
-## 🧪 States Implemented
+### ↕️ Sorting Options
 
-# Loading State
+Users can sort podcasts by:
 
-- Displays a loading message while fetching data.
+- Newest first (last updated date)
 
-- Error State
+- Oldest first
 
-- Shows a meaningful error message if the API request fails.
+- Title A → Z
 
-- Empty State
+- Title Z → A
 
-- If no podcasts are returned, a user-friendly fallback message appears.
+- Default order
+
+Sorting never resets the UI state — results stay consistent.
 
 ---
 
-## 🏗 Technologies Used
+### 🎭 Genre Filtering
 
-- React (functional components)
+- Users can filter podcasts by genre using a dropdown.
 
-- Vite
+- Genre titles come from the provided data.js file.
 
-- JavaScript (ES modules)
+- Filters stack with search, sort, and pagination.
 
-- CSS Grid / Flexbox
+- The selected filter persists while navigating pages.
 
-- Fetch API
+---
 
-- Date formatting utilities
+### 📄 Pagination System
+
+- Results are displayed in manageable pages.
+
+- Pagination respects search, sort, and filter states.
+
+- Number of items per page adapts to screen width:
+
+  - Mobile/Tablet: fixed 10 items
+
+  - Desktop: dynamically calculated based on available space
+
+---
+
+### 🧠 Global State Management (React Context)
+
+A custom PodcastContext provides centralised state for:
+
+- search
+
+- sortKey
+
+- genre
+
+- page
+
+- pageSize
+
+- Filtered/sorted/paginated podcast data
+
+All UI components stay perfectly synchronised.
+
+---
+
+## 🏗️ Technical Implementation
+
+### 🎯 React Functional Components
+
+The UI is built using modular, reusable components:
+
+- PodcastGrid
+
+- PodcastCard
+
+- PodcastToolbar
+
+- PaginationControls
+
+- Header
+
+PodcastContext
+
+---
+
+### 🛠️ Setup Instructions
+
+1️⃣ Install dependencies
+npm install
+
+2️⃣ Start the development server
+npm run dev
+
+3️⃣ Open in browser
+
+---
+
+### 🔧 React Hooks
+
+The app makes extensive use of:
+
+- useState()
+
+- useEffect()
+
+- useMemo()
+
+- Custom hook: usePodcastContext()
+
+---
+
+### 🌐 Fetching Data
+
+All podcast previews are fetched from:
+
+https://podcast-api.netlify.app/
+
+Fetched data is passed into the context provider for processing.
 
 ---
